@@ -47,6 +47,7 @@ function CreatePostButton(props) {
               props.onShowPost(postType); // postType --> Tab
               setConfirmLoading({ confirmLoading: false });
               // refresn the page
+              window.location.reload();
             }
           })
           .catch((err) => {

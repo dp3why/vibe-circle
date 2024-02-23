@@ -9,7 +9,7 @@ import { Typography } from "antd";
 const { Title } = Typography;
 const captionStyle = {
   backgroundColor: "rgba(0, 0, 0, 0.8)",
-  maxHeight: "240px",
+  maxHeight: "300px",
   overflow: "hidden",
   position: "absolute",
   bottom: "0",
@@ -88,6 +88,7 @@ const PhotoGallery = ({ images }) => {
 PhotoGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
+      postId: PropTypes.string,
       user: PropTypes.string,
       caption: PropTypes.string,
       src: PropTypes.string,

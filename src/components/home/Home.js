@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, message, Row, Tabs } from "antd";
+import { message, Tabs } from "antd";
 import SearchBar from "../searchbar/SearchBar";
 import "./Home.css";
 import { SEARCH_KEY, BASE_URL, TOKEN_KEY } from "../../constants";
@@ -70,34 +70,52 @@ const Home = (props) => {
         .filter((item) => item.type === "image")
         .map((image) => {
           return {
+            postId: image.id,
             src: image.url,
             user: image.user,
             caption: image.message,
             thumbnail: image.url,
-            thumbnailWidth: 300,
-            thumbnailHeight: 200,
+            thumbnailWidth: 400,
+            thumbnailHeight: 300,
           };
         });
       return <PhotoGallery images={imageArr} />;
     }
     if (type === "video") {
       return (
-        <Row gutter={32}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
           {posts
             .filter((item) => item.type === "video")
             .map((video) => (
-              <Col span={8} key={video.url}>
+              <div
+                style={{
+                  margin: "2em",
+                }}
+                key={video.url}
+              >
                 <video
                   src={video.url}
                   controls={true}
                   className="video-block"
+                  style={{ maxWidth: "800px" }}
                 />
                 <p>
                   {video.user}: {video.message}
                 </p>
-              </Col>
+              </div>
             ))}
-        </Row>
+        </div>
       );
     }
   };
