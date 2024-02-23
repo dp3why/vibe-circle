@@ -11,6 +11,10 @@ function CreatePostButton(props) {
   let postForm = null;
 
   const showModal = () => {
+    if (!props.isLoggedIn) {
+      message.warning("Please login to create a post!");
+      return;
+    }
     setIsModalVisible(true);
   };
 

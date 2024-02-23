@@ -9,7 +9,7 @@ import CreatePostButton from "../createpost/CreatePostButton";
 import "yet-another-react-lightbox/plugins/captions.css";
 
 const { TabPane } = Tabs;
-const Home = (props) => {
+const Home = ({ isLoggedIn }) => {
   const [posts, setPosts] = useState([]);
   const [activeTab, setActiveTab] = useState("image");
   const [searchOption, setSearchOption] = useState({
@@ -136,7 +136,9 @@ const Home = (props) => {
     }, 1000);
   };
 
-  const operations = <CreatePostButton onShowPost={onShowPost} />;
+  const operations = (
+    <CreatePostButton isLoggedIn={isLoggedIn} onShowPost={onShowPost} />
+  );
 
   return (
     <div className="home">
