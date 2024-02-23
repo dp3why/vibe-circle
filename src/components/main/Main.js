@@ -5,26 +5,27 @@ import Home from "../home/Home";
 import "./Main.css";
 import Register from "../register/Register";
 
+// router configuration
 const Main = ({ isLoggedIn, handleLoggedIn }) => {
   const showLogin = () => {
     return isLoggedIn ? (
-      <Redirect to="/home" />
+      <Redirect to="/" />
     ) : (
       <Login handleLoggedIn={handleLoggedIn} />
     );
   };
 
-  const showHome = () => {
-    return isLoggedIn ? <Home /> : <Redirect to="/login" />;
-  };
+  // const showHome = () => {
+  //   return isLoggedIn ? <Home /> : <Redirect to="/login" />;
+  // };
 
   return (
     <div className="main">
       <Switch>
-        <Route exact path="/" render={showLogin} />
+        <Route exact path="/" component={Home} />
         <Route path="/login" render={showLogin} />
         <Route path="/register" component={Register} />
-        <Route path="/home" render={showHome} />
+        {/* <Route path="/home" component={Home} /> */}
       </Switch>
     </div>
   );

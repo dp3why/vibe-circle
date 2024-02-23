@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import "./TopBar.css";
 import { UserSwitchOutlined } from "@ant-design/icons";
@@ -32,27 +33,28 @@ const TopBar = ({ isLoggedIn, handleLogout }) => {
           backgroundColor: "transparent",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Avatar
-            preview={false}
-            src={logo}
-            alt="logo"
+        <Link to="/">
+          <div
             style={{
-              width: "4em",
-              height: "4em",
-              marginRight: "0.8em",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
-          <Text className="App-title">VibeCircle</Text>
-        </div>
-
+          >
+            <Avatar
+              preview={false}
+              src={logo}
+              alt="logo"
+              style={{
+                width: "4em",
+                height: "4em",
+                marginRight: "0.8em",
+              }}
+            />
+            <Text className="App-title">VibeCircle</Text>
+          </div>
+        </Link>
         {isLoggedIn ? (
           <Button
             icon={<UserSwitchOutlined />}
@@ -68,25 +70,29 @@ const TopBar = ({ isLoggedIn, handleLogout }) => {
           </Button>
         ) : (
           <div>
-            <Button
-              size="large"
-              type="primary"
-              style={{
-                borderRadius: "15px",
-                marginRight: "1em",
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              size="large"
-              type="primary"
-              style={{
-                borderRadius: "15px",
-              }}
-            >
-              Register
-            </Button>
+            <Link to="/login">
+              <Button
+                size="large"
+                type="primary"
+                style={{
+                  borderRadius: "15px",
+                  marginRight: "1em",
+                }}
+              >
+                Login
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button
+                size="large"
+                type="primary"
+                style={{
+                  borderRadius: "15px",
+                }}
+              >
+                Register
+              </Button>{" "}
+            </Link>
           </div>
         )}
       </Header>
