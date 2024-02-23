@@ -3,6 +3,7 @@ import { Button, Modal, message } from "antd";
 import PostForm from "./PostForm";
 import axios from "axios";
 import { BASE_URL, TOKEN_KEY } from "../../constants";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 function CreatePostButton(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,6 +46,7 @@ function CreatePostButton(props) {
               handleCancel(); // call the cancel callback
               props.onShowPost(postType); // postType --> Tab
               setConfirmLoading({ confirmLoading: false });
+              // refresn the page
             }
           })
           .catch((err) => {
@@ -62,7 +64,15 @@ function CreatePostButton(props) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button
+        type="primary"
+        size="large"
+        style={{
+          borderRadius: "15px",
+        }}
+        onClick={showModal}
+        icon={<PlusCircleOutlined />}
+      >
         Create New Post
       </Button>
       <Modal

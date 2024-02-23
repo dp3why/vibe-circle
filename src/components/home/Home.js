@@ -6,6 +6,7 @@ import { SEARCH_KEY, BASE_URL, TOKEN_KEY } from "../../constants";
 import axios from "axios";
 import PhotoGallery from "../photogallery/PhotoGallery";
 import CreatePostButton from "../createpost/CreatePostButton";
+import "yet-another-react-lightbox/plugins/captions.css";
 
 const { TabPane } = Tabs;
 const Home = (props) => {
@@ -73,8 +74,8 @@ const Home = (props) => {
             user: image.user,
             caption: image.message,
             thumbnail: image.url,
-            // thumbnailWidth: 300,
-            // thumbnailHeight: 200,
+            thumbnailWidth: 300,
+            thumbnailHeight: 200,
           };
         });
       return <PhotoGallery images={imageArr} />;

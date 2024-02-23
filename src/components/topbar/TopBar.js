@@ -1,75 +1,113 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
 import "./TopBar.css";
-import { LogoutOutlined } from "@ant-design/icons";
+import { UserSwitchOutlined } from "@ant-design/icons";
 import { Layout, Typography, Avatar, Button } from "antd";
 const { Header } = Layout;
-const { Text } = Typography;
+const { Title, Text } = Typography;
 const TopBar = ({ isLoggedIn, handleLogout }) => {
   return (
-    <Header
-      className="App-header"
+    <div
+      className=""
       style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "60vh",
+        width: "100%",
         backgroundImage: `url("/images/bg.jpg")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "60vh",
-        width: "100%",
-        display: "flex",
-        alignItems: "start",
         paddingLeft: "4em",
         paddingTop: "3em",
+        justifyContent: "space-between",
       }}
     >
-      <div
+      <Header
+        className="App-header"
         style={{
+          width: "100%",
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
+          alignItems: "start",
+          justifyContent: "space-between",
+          backgroundColor: "transparent",
         }}
       >
-        <Avatar
-          preview={false}
-          src={logo}
-          alt="logo"
+        <div
           style={{
-            width: "4em",
-            height: "4em",
-            marginRight: "0.8em",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-        <Text className="App-title" color="#c167fe">
-          VibeCircle
-        </Text>
-      </div>
-
-      {isLoggedIn ? (
-        <LogoutOutlined className="logout" onClick={handleLogout} />
-      ) : (
-        <div>
-          <Button
-            size="large"
-            type="primary"
+        >
+          <Avatar
+            preview={false}
+            src={logo}
+            alt="logo"
             style={{
-              borderRadius: "15px",
-              marginRight: "1em",
+              width: "4em",
+              height: "4em",
+              marginRight: "0.8em",
             }}
-          >
-            Login
-          </Button>
-          <Button
-            size="large"
-            type="primary"
-            style={{
-              borderRadius: "15px",
-            }}
-          >
-            Register
-          </Button>
+          />
+          <Text className="App-title">VibeCircle</Text>
         </div>
-      )}
-    </Header>
+
+        {isLoggedIn ? (
+          <Button
+            icon={<UserSwitchOutlined />}
+            size="large"
+            type="primary"
+            style={{
+              borderRadius: "15px",
+              marginLeft: "auto",
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <div>
+            <Button
+              size="large"
+              type="primary"
+              style={{
+                borderRadius: "15px",
+                marginRight: "1em",
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              size="large"
+              type="primary"
+              style={{
+                borderRadius: "15px",
+              }}
+            >
+              Register
+            </Button>
+          </div>
+        )}
+      </Header>
+      <div
+        className=""
+        style={{
+          height: "25vh",
+        }}
+      >
+        <Title>
+          <Text
+            style={{
+              color: "white",
+              fontSize: "1.2em",
+            }}
+          >
+            A place where you can share your vibes with the world
+          </Text>
+        </Title>
+      </div>
+    </div>
   );
 };
 

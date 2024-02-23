@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Gallery } from "react-grid-gallery";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { Captions } from "yet-another-react-lightbox/plugins";
+import { Typography } from "antd";
 
+const { Title } = Typography;
 const captionStyle = {
   backgroundColor: "rgba(0, 0, 0, 0.8)",
   maxHeight: "240px",
@@ -23,6 +28,33 @@ const wrapperStyle = {
 };
 
 const PhotoGallery = ({ images }) => {
+  const [index, setIndex] = useState(-1);
+
+  const slides = images.map(({ src, user, caption }) => ({
+    src,
+    title: (
+      <div style={{ alignItems: "center" }}>
+        <Title
+          level={3}
+          style={{
+            color: "white",
+          }}
+          align="center"
+        >
+          {user}
+        </Title>
+      </div>
+    ),
+    description: (
+      <Title level={3} align="center" style={{ color: "white" }}>
+        {caption}
+      </Title>
+    ),
+  }));
+
+  const handleClick = (index, item) => setIndex(index);
+
+  // add subtitle to each image
   const imageArr = images.map((image) => {
     return {
       ...image,
@@ -40,6 +72,14 @@ const PhotoGallery = ({ images }) => {
         images={imageArr}
         enableImageSelection={false}
         backdropClosesModal={true}
+        onClick={handleClick}
+      />
+      <Lightbox
+        slides={slides}
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        plugins={[Captions]}
       />
     </div>
   );
