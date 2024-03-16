@@ -12,6 +12,9 @@ const SearchBar = (props) => {
     const searchType = e.target.value;
     setSearchType(searchType);
     setError("");
+    if (searchType === SEARCH_KEY.all) {
+      props.handleSearch({ type: searchType, keyword: "" });
+    }
   };
 
   const handleSearch = (value) => {

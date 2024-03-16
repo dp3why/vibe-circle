@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { message, Tabs } from "antd";
+import { Tabs } from "antd";
 import SearchBar from "../searchbar/SearchBar";
 import "./Home.css";
 import { SEARCH_KEY, BASE_URL, TOKEN_KEY } from "../../constants";
@@ -16,9 +16,10 @@ const Home = ({ isLoggedIn }) => {
     type: SEARCH_KEY.all,
     keyword: "",
   });
-  useEffect(() => {
-    fetchPost(searchOption);
-  }, [searchOption]);
+  const handleSearch = (option) => {
+    const { type, keyword } = option;
+    setSearchOption({ type: type, keyword: keyword });
+  };
 
   const fetchPost = (option) => {
     const { type, keyword } = option;
@@ -28,10 +29,7 @@ const Home = ({ isLoggedIn }) => {
     } else if (type === SEARCH_KEY.user) {
       url = `${BASE_URL}/search?user=${keyword}`;
     } else {
-      url = `${BASE_URL}/search?keyword=${keyword}`;
-    }
-    if (keyword) {
-      url += `&keyword=${keyword}`;
+      url = `${BASE_URL}/search?keywords=${keyword}`;
     }
     const opt = {
       method: "GET",
@@ -47,8 +45,7 @@ const Home = ({ isLoggedIn }) => {
         }
       })
       .catch((err) => {
-        console.log("fetch post failed:", err.message);
-        message.error("fetch post failed");
+        console.error("fetch post failed:", err.message);
       });
   };
   useEffect(() => {
@@ -118,12 +115,6 @@ const Home = ({ isLoggedIn }) => {
         </div>
       );
     }
-  };
-
-  const handleSearch = (opt) => {
-    // trigger useEffect.
-    const { type, keyword } = opt;
-    setSearchOption({ type: type, keyword: keyword });
   };
 
   const onShowPost = (tab) => {
